@@ -1,0 +1,134 @@
+#include <ESPAsyncWebServer.h>
+#include "FS.h"
+#include "SD_MMC.h"
+#include "index_html.h"
+
+#include "MPU9250.h"
+
+
+AsyncWebServer webserver(80);
+AsyncWebSocket ws("/ws");
+
+MPU9250 mpu;
+
+//using namespace websockets;
+//WebsocketsServer socket_server;
+
+const char* ssid = "NSA HONEYPOT";
+const char* password = "only4andrew";
+float q[4] = {1.0f, 0.0f, 0.0f, 0.0f};    // vector to hold quaternion
+
+void setup()
+{
+  Serial.begin(115200);
+
+  pinMode(2, INPUT_PULLUP); // SD pin -  https://github.com/espressif/esp-idf/issues/227
+
+  init_wifi();
+
+  //Wire.begin();
+
+  delay(2000);
+  mpu.setup();
+
+  init_sdcard_arduino_stylie();
+
+  //  ws.onEvent(onEvent);
+  webserver.addHandler(&ws);
+
+  webserver.on("/", HTTP_GET, [](AsyncWebServerRequest * request) {
+    AsyncWebServerResponse *response = request->beginResponse_P(200, "text/html", index_html_gz, sizeof(index_html_gz));
+    response->addHeader("Content-Encoding", "gzip");
+    request->send(response);
+  });
+
+  webserver.on("/build/three.module.js", HTTP_GET, [](AsyncWebServerRequest * request) {
+    Serial.println("requesting three.module.js from SD");
+    request->send(SD_MMC, "/three.module.js", "application/javascript");
+  });
+  webserver.on("/examples/jsm/loaders/GLTFLoader.js", HTTP_GET, [](AsyncWebServerRequest * request) {
+    Serial.println("requesting gtlfloader.js from SD");
+    request->send(SD_MMC, "/GLTFLoader.js", "application/javascript");
+  });
+  webserver.on("/scene9_resized.glb", HTTP_GET, [](AsyncWebServerRequest * request) {
+    Serial.println("requesting model from SD");
+    request->send(SD_MMC, "/3dmodel.glb", "application/octet-stream");
+  });
+
+  webserver.begin();
+
+
+  // socket_server.listen(82);
+}
+
+bool init_wifi()
+{
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.print("Ready! Use 'http://");
+  Serial.print(WiFi.localIP());
+  Serial.println("' to connect");
+  return true;
+}
+
+void init_sdcard_arduino_stylie()
+{
+  if (!SD_MMC.begin("/sd", true)) {
+    Serial.println("Card Mount Failed");
+    return;
+  }
+  uint8_t cardType = SD_MMC.cardType();
+
+  if (cardType == CARD_NONE) {
+    Serial.println("No SD_MMC card attached");
+    return;
+  }
+
+  Serial.print("SD_MMC Card Type: ");
+  if (cardType == CARD_MMC) {
+    Serial.println("MMC");
+  } else if (cardType == CARD_SD) {
+    Serial.println("SDSC");
+  } else if (cardType == CARD_SDHC) {
+    Serial.println("SDHC");
+  } else {
+    Serial.println("UNKNOWN");
+  }
+
+  uint64_t cardSize = SD_MMC.cardSize() / (1024 * 1024);
+  Serial.printf("SD_MMC Card Size: %lluMB\n", cardSize);
+
+  Serial.printf("Total space: %lluMB\n", SD_MMC.totalBytes() / (1024 * 1024));
+  Serial.printf("Used space: %lluMB\n", SD_MMC.usedBytes() / (1024 * 1024));
+}
+
+void loop()
+{
+  //auto client = socket_server.accept();
+  //client.onMessage(handle_message);
+
+  //  while (client.available()) {
+  //    client.poll();
+
+  //mpu.update();
+  //mpu.print();
+
+
+ // Serial.println("getQuaternion : ");
+ // Serial.print("--- q0 = "); Serial.print(mpu.getQuaternion(0));
+ // Serial.print("--- qx = "); Serial.print(mpu.getQuaternion(1));
+ // Serial.print("--- qy = "); Serial.print(mpu.getQuaternion(2));
+ // Serial.print("--- qz = "); Serial.print(mpu.getQuaternion(3));
+
+  //char quaternion[25];
+ // sprintf(quaternion, "%2.2f|%2.2f|%2.2f|%2.2f", mpu.getQuaternion(0), mpu.getQuaternion(1), mpu.getQuaternion(2), mpu.getQuaternion(3));
+ // Serial.println(quaternion);
+
+  //ws.textAll((char*)id4html);// image id for slide
+  //client.send("quaternion");
+  //  }
+
+}
