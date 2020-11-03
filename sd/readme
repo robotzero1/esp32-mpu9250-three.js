@@ -1,1 +1,4 @@
-Copy these files to your SD card.
+Copy the files in this directory to your SD card.
+
+The parcel.xxx.js file is all the required JavaScript files bundled into one file. I used Parcel (https://parceljs.org/) to do this.
+scene14_mixer_builder_creators3d.glb is the 3D file in GLB format. 
