@@ -21,9 +21,9 @@ let camera, composer, renderer, scene;
 let currentTime = 0;
 let mouse, raycaster; // For mouse event
 
-let clock = new THREE.Clock();
-let group = new THREE.Group();
-let loader = new GLTFLoader();
+const clock = new THREE.Clock();
+const group = new THREE.Group();
+const loader = new GLTFLoader();
 
 init();
 animate();
@@ -218,7 +218,7 @@ function summonLightning () {
 
     let lightningStrike;
     let lightningStrikeMesh;
-    let outlineMeshArray = [];
+    const outlineMeshArray = [];
 
     scene.recreateRay = function () {
 
