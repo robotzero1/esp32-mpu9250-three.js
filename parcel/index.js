@@ -48,7 +48,7 @@ function init() {
 
 	loader.load(
 		// resource URL
-		'glib.glb',
+		'glb.glb',
 		// called when the resource is loaded
 		function(gltf) {
 			const object = gltf.scene;

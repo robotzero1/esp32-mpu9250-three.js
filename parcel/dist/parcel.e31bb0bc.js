@@ -42739,7 +42739,7 @@ function init() {
   scene.timeRate = 1;
   summonLightning();
   loader.load( // resource URL
-  'glib.glb', // called when the resource is loaded
+  'glb.glb', // called when the resource is loaded
   function (gltf) {
     var object = gltf.scene;
     object.name = "robot";
