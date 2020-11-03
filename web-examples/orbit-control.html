@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Auto Rotate</title>
+	<title>Orbit Control</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 </head>
@@ -53,14 +53,12 @@ function init () {
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.outputEncoding = THREE.sRGBEncoding;
-
+	
 	const controls = new OrbitControls( camera, renderer.domElement );
 	controls.addEventListener('start', onOrbitMoveStart);
     controls.addEventListener('end', onOrbitMoveEnd);
 	controls.update()    
 	
-	
-
     document.body.appendChild(renderer.domElement);
 
     composer = new EffectComposer(renderer);
@@ -72,7 +70,7 @@ function init () {
 
     loader.load(
         // Resource URL
-        "mixer_export_builder.glb",
+        "scene14_mixer_builder_creators3d.glb",
          // Called when the resource is loaded
         (gltf) => {
             const object = gltf.scene;
