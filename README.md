@@ -1,6 +1,6 @@
 # Robot, Movement Sensor and three.js 3D model
 
-Adding a backpack containing an ESP32, 9-axis movement sensor, battery and switch to a toy robot and controlling a 3D model in the browser with three.js
+Adding a backpack containing an ESP32, 9-axis movement sensor, battery and switch to a toy robot and controlling a 3D model in the browser with three.js. Full instructions on the blog: https://robotzero.one/esp32-mpu9250-three-js/
 
 ![Toy Robot and 3D Model](https://robotzero.one/github-assets/3d-robot-mpu9250-threejs.jpg)
 
