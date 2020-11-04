@@ -4,6 +4,8 @@ Adding a backpack containing an ESP32, 9-axis movement sensor, battery and switc
 
 ![Toy Robot and 3D Model](https://robotzero.one/github-assets/3d-robot-mpu9250-threejs.jpg)
 
+This repository contains the Arduino IDE sketch robotRotationMPU9250.ino and the three folders described below
+
 ### web-examples
 If you just want to have a quick look and play with this project, this folder contains two examples that don't require the ESP32 and MPU9250.
 
