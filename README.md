@@ -2,6 +2,8 @@
 
 Adding a backpack containing an ESP32, 9-axis movement sensor, battery and switch to a toy robot and controlling a 3D model in the browser with three.js
 
+![Toy Robot and 3D Model](https://robotzero.one/github-assets/3d-robot-mpu9250-threejs.jpg)
+
 ### web-examples
 If you just want to have a quick look and play with this project, this folder contains two examples that don't require the ESP32 and MPU9250.
 
