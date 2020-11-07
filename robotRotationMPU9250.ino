@@ -16,8 +16,8 @@ AsyncWebSocket ws("/ws");
 Preferences prefs;
 MPU9250 mpu;
 
-const char* ssid = "NSA HONEYPOT";
-const char* password = "only4andrew";
+const char* ssid = "NSA";
+const char* password = "orange";
 
 bool lightning_status = 0;
 long current_millis;
